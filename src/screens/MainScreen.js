@@ -9,14 +9,14 @@ export const MainScreen = ({ addTodo, todos, removeTodo, openTodo }) => {
       <AddTodo onSubmit={addTodo} />
 
       <FlatList
-        keyExtractor={(item) => item.id.toString()}
+        keyExtractor={item => item.id.toString()}
         data={todos}
         renderItem={({ item }) => (
           <Todo todo={item} onRemove={removeTodo} onOpen={openTodo} />
         )}
       />
     </View>
-  );
-};
+  )
+}
 
-const styles = StyleSheet.create({}); 
+const styles = StyleSheet.create({})
