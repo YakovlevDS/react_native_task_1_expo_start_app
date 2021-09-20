@@ -1,12 +1,13 @@
-import React from 'react'
-import { StyleSheet, View, Text } from 'react-native'
+import React from "react";
+import { StyleSheet, View, Text, Button } from "react-native";
 
-export const TodoScreen = props => {
+export const TodoScreen = ({ goBack, todo }) => {
   return (
     <View>
-      <Text>Todo Screen</Text>
+      <Text>{todo.title}</Text>
+      <Button title="Назад" onPress={goBack} />
     </View>
-  )
-}
+  );
+};
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});
