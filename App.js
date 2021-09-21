@@ -6,14 +6,14 @@ import { MainScreen } from "./src/screens/MainScreen";
 import { TodoScreen } from "./src/screens/TodoScreen";
 
 export default function App() {
-  const [todoId, setTodoId] = useState(null);
+  const [todoId, setTodoId] = useState("2");
   const [todos, setTodos] = useState([
     { id: "1", title: "Выучить React Native" },
     { id: "2", title: "Написать приложение" },
   ]);
 
-  const addTodo = title => {
-    setTodos(prev => [
+  const addTodo = (title) => {
+    setTodos((prev) => [
       ...prev,
       {
         id: Date.now().toString(),
@@ -23,7 +23,7 @@ export default function App() {
   };
 
   const removeTodo = (id) => {
-    const todo = todos.find(t => t.id === id);
+    const todo = todos.find((t) => t.id === id);
     Alert.alert(
       "Удаление элемента",
       `Вы уверены, что хотите удалить "${todo.title}"?`,
@@ -37,7 +37,7 @@ export default function App() {
           style: "destructive",
           onPress: () => {
             setTodoId(null);
-            setTodos((prev) => prev.filter(todo => todo.id !== id));
+            setTodos((prev) => prev.filter((todo) => todo.id !== id));
           },
         },
       ],
@@ -45,6 +45,16 @@ export default function App() {
     );
   };
 
+  const updateTodo = (id, title) => {
+    setTodos((old) =>
+      old.map((todo) => {
+        if (todo.id === id) {
+          todo.title = title;
+        }
+        return todo;
+      })
+    );
+  };
 
   let content = (
     <MainScreen
@@ -56,12 +66,13 @@ export default function App() {
   );
 
   if (todoId) {
-    const selectedTodo = todos.find(todo => todo.id === todoId);
+    const selectedTodo = todos.find((todo) => todo.id === todoId);
     content = (
       <TodoScreen
         onRemove={removeTodo}
         goBack={() => setTodoId(null)}
         todo={selectedTodo}
+        onSave={updateTodo}
       />
     );
   }
