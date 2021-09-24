@@ -14,12 +14,12 @@ export const AddTodo = ({ onSubmit }) => {
   const [value, setValue] = useState('')
 
   const pressHandler = () => {
-    if (value.trim()) {
-      onSubmit(value)
-      setValue('')
-      Keyboard.dismiss()
+    if (!value.trim() || value.trim().length < 3) {
+      Alert.alert("Название дела не может быть пустым или меньше 3 символов");
     } else {
-      Alert.alert('Название дела не может быть пустым')
+      onSubmit(value);
+      setValue("");
+      Keyboard.dismiss();
     }
   }
 
