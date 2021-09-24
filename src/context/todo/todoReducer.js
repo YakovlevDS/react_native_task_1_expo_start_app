@@ -15,7 +15,7 @@ const handlers = {
     todos: [
       ...state.todos,
       {
-        id: Date.now().toString(),
+        id,
         title,
       },
     ],
